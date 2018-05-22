@@ -156,6 +156,7 @@
     <Compile Include="GlobalVariables.cs" />
     <Compile Include="IGlobalSettings.cs" />
     <Compile Include="MyFileManager.cs" />
+    <Compile Include="Pdeep.cs" />
     <Compile Include="PepWithSetModForCompactPep.cs" />
     <Compile Include="Proteomics\BestPeptideScoreNotch.cs" />
     <Compile Include="Parameters\CommonParameters.cs" />
@@ -193,6 +194,7 @@
     <Compile Include="Test\Test.cs" />
     <Compile Include="TsvResultReader.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\PdeepViewModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -293,6 +295,12 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CMD\CMD.csproj">
+      <Project>{6ac98d4b-2f2a-4edb-9573-185c03f00872}</Project>
+      <Name>CMD</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\mzLib.1.0.301\build\net45\mzLib.targets" Condition="Exists('..\packages\mzLib.1.0.301\build\net45\mzLib.targets')" />

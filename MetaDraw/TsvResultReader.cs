@@ -44,6 +44,7 @@ namespace MetaDraw
                 PsmCross PSM = new PsmCross();
                 PSM.ScanNumber = Convert.ToInt32(resultArray[i][ids["Scan Number"]]);
                 var baseSeq = resultArray[i][ids["Base Sequence"]];
+                var chargeState = resultArray[i][ids["Precursor Charge"]];
                 var fullSeq = resultArray[i][ids["Full Sequence"]];
                 if (baseSeq.Contains("|"))
                 {
@@ -51,6 +52,7 @@ namespace MetaDraw
                     fullSeq = fullSeq.Split('|').First();
                 }
                 PSM.BaseSequence = baseSeq;
+                PSM.ScanPrecursorCharge = Convert.ToInt32(chargeState);
                 PSM.FullSequence = fullSeq;
                 PSM.IsDecoy = (resultArray[i][ids["Decoy"]]=="N" ? false :true);
                 PSM.PeptideMonisotopicMass = Convert.ToDouble(resultArray[i][ids["Precursor Mass"]]);

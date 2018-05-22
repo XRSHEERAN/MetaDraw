@@ -660,6 +660,7 @@ namespace EngineLayer.CrosslinkSearch
             }
             pmmhCurr.ProductMz = x.ToArray();
             pmmhCurr.ProductName = y.ToArray();
+
             Array.Sort(pmmhCurr.ProductMz, pmmhCurr.ProductName);
 
 

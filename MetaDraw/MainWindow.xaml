@@ -75,8 +75,11 @@
                                 </Style>
                             </DataGrid.Resources>
                         </DataGrid>
-                        <TextBox Name="txtScanNum" Text="Scan Number" Grid.Row="1"/>
-                        <Button Name="btnDraw" Content="Draw" Grid.Row="2" Click="btnDraw_Click"/>
+                        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
+                            <TextBox Name="txtScanNum" Text="Scan Number" />
+                            <Button Name="btnDraw" Content="Draw" Click="btnDraw_Click"/>
+                        </StackPanel>
+                        <Button Name="btnPdeep" Content="pDeep" Click="btnPdeep_Click" Grid.Row="2"/>
                     </Grid>
                 </GroupBox>
             </Grid>
@@ -86,9 +89,18 @@
                           Background="Silver"
                           Width="5"/>
             <Grid Grid.Column="2">
-                <GroupBox Header="PSM" Name="gbPSM">
-                    <oxy:PlotView x:Name="plotView" Model="{Binding Model}"/>
-                </GroupBox>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <GroupBox Header="PSM" Name="gbPSM" Grid.Row="0">
+                        <oxy:PlotView x:Name="plotView" Model="{Binding Model}"/>
+                    </GroupBox>
+                    <GroupBox Header="PSM pDeep" Name="gbPSMpDeep" Grid.Row="1">
+                        <oxy:PlotView x:Name="plotViewPdeep" Model="{Binding PdeepModel}"/>
+                    </GroupBox>
+                </Grid>
             </Grid>
         </Grid>
     </DockPanel>

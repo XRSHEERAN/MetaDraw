@@ -85,7 +85,7 @@ namespace ViewModels
             var y = MsScanForDraw.TheScan.MassSpectrum.YArray;
 
             string scanNum = psmParentsForDraw.ScanNumber.ToString();
-            string sequence1 = psmParentsForDraw.FullSequence + "-" + psmParentsForDraw.XlPos.ToString();
+            string sequence1 = psmParentsForDraw.FullSequence;
 
             var matchedIonDic1 = psmParentsForDraw.MatchedIonInfo;
 

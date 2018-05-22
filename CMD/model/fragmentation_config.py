@@ -5,7 +5,7 @@ class Common_Config(object):
         self.ion_types = ['y','b']
         self.ion_terms = {'b':'n','y':'c','c':'n','z':'c','b_mod_loss':'n','y_mod_loss':'c'}
         self.from_CTerm = False
-        self.modini = r'e:\GitHub\pdeep\config_file\modification.ini'
+        self.modini = r'/mnt/e/GitHub/MetaDraw/MetaDraw/bin/x64/Debug/config_file/modification.ini'
         self.fixmod = ['Carbamidomethyl[C]']
         self.varmod = []
         self.var_mod_num = 0

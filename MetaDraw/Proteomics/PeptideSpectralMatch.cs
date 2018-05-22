@@ -59,7 +59,7 @@ namespace EngineLayer
         public double ScanRetentionTime { get; }
         public int ScanExperimentalPeaks { get; }
         public double TotalIonCurrent { get; }
-        public int ScanPrecursorCharge { get; }
+        public int ScanPrecursorCharge { get; set; }
         public double ScanPrecursorMonoisotopicPeakMz { get; set; }
         public double ScanPrecursorMass { get; }
         public string FullFilePath { get; }

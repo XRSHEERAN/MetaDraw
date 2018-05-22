@@ -70,5 +70,11 @@ namespace MetaDraw
             var matchedIonMassesListPositiveIsMatch = new MatchedIonInfo(pmm.ProductMz.Length);
             //double pmmScore = PsmCross.XlMatchIons(theScan.TheScan, productMassTolerance, pmm.ProductMz, pmm.ProductName, matchedIonMassesListPositiveIsMatch);
         }
+
+        [Test]
+        public void TestpDeepParser()
+        {
+            Pdeep.pDeepParser(null);
+        }
     }
 }

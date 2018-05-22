@@ -10,9 +10,9 @@ using System.Text.RegularExpressions;
 
 namespace CMD
 {
-    class Program
+    public class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             //setup
             if (false)
@@ -28,10 +28,11 @@ namespace CMD
 
             //Run pdeep python script 
             List<string> command = new List<string>();
-            string workingPath = Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location));
+            string workingPath = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
             string scriptPath = Path.Combine(workingPath, "test.bash");
             command.Add("cd" + " " + ConvertWindowsPath(workingPath));
-            command.Add("python3 example.py > test.txt");
+            //command.Add("python3 example.py > test.txt");           
+            command.Add("python3 input.py");
             GenerateAndRunScript(scriptPath, command).WaitForExit();
         }
 

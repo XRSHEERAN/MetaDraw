@@ -10,6 +10,7 @@ using EngineLayer.CrosslinkSearch;
 using System.Collections.Generic;
 using MzLibUtil;
 using System.Text.RegularExpressions;
+using CMD;
 
 namespace MetaDraw
 {
@@ -21,8 +22,10 @@ namespace MetaDraw
         private readonly ObservableCollection<RawDataForDataGrid> spectraFilesObservableCollection = new ObservableCollection<RawDataForDataGrid>();
         private readonly ObservableCollection<RawDataForDataGrid> resultFilesObservableCollection = new ObservableCollection<RawDataForDataGrid>();
         private MainViewModel mainViewModel = null;
+        private PdeepModelView pdeepModelView = null;
         private Ms2ScanWithSpecificMass[] arrayOfMs2ScansSortedByMass = null;
         private List<PsmCross> PSMs = null;
+        private Dictionary<int, double[]> predictedIntensities = null;
         private readonly ObservableCollection<SpectrumForDataGrid> spectrumNumsObservableCollection = new ObservableCollection<SpectrumForDataGrid>();
 
         public MainWindow()
@@ -33,6 +36,10 @@ namespace MetaDraw
             mainViewModel = new MainViewModel();
 
             plotView.DataContext = mainViewModel;
+
+            pdeepModelView = new PdeepModelView();
+
+            plotViewPdeep.DataContext = pdeepModelView;
 
             dataGridMassSpectraFiles.DataContext = spectraFilesObservableCollection;
 
@@ -173,6 +180,7 @@ namespace MetaDraw
             btnRun.IsEnabled = false;
 
             mainViewModel.Model.InvalidatePlot(true);
+            pdeepModelView.PdeepModel.InvalidatePlot(true);
 
             int x = Convert.ToInt32(txtScanNum.Text);
 
@@ -227,9 +235,24 @@ namespace MetaDraw
 
             double pmmScore = PsmCross.XlMatchIons(msScanForDraw.TheScan, productMassTolerance, pmm.ProductMz, pmm.ProductName, matchedIonMassesListPositiveIsMatch);
 
+            matchedIonMassesListPositiveIsMatch.PredictedIonName = psmCross.ProductMassesMightHaveDuplicatesAndNaNs(lp).ProductName;
+            matchedIonMassesListPositiveIsMatch.PredictedIonMZ = psmCross.ProductMassesMightHaveDuplicatesAndNaNs(lp).ProductMz;
+            matchedIonMassesListPositiveIsMatch.PredictedIonIntensity = predictedIntensities[psmCross.ScanNumber];
+
             psmCross.MatchedIonInfo = matchedIonMassesListPositiveIsMatch;
 
+
             mainViewModel.UpdateCrosslinkModelForSingle(msScanForDraw, psmCross);
+
+            pdeepModelView.UpdataModelForPdeep(psmCross);
+
+        }
+
+        private void btnPdeep_Click(object sender, RoutedEventArgs e)
+        {
+            Pdeep.pDeepSearchInput(PSMs);
+            CMD.Program.Main(new string[] { });
+            predictedIntensities = Pdeep.pDeepParser(PSMs);
         }
     }
 }
